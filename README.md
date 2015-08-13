@@ -1,14 +1,19 @@
-#SUI - Spynix's UI
+﻿#SUI - Spynix's UI
 
 This UI code is not particularly robust, nor is it full of the expansive
 features found in popular packages.  The purpose of it is to fill a smaller
 niche, while including many popular UI functions.
 
+I wanted to call the library something like Simple UI or Standalone UI or the
+like.  Problem is, those names are either so common they're definitely already
+taken, they're too long for me to bother typing repeatedly, or they're just
+plain stupid sounding.  So I simply settled on Spynix's UI for now.
+
 ##Ideology
 
-- Each module should be completely self-sufficient, able to handle its own needs.
-No pollution of the DOM, no window globals.  Sometimes it has to be done, but
-the idea is to make the intrusion as small as possible.
+- Each module should be self-sufficient.  No pollution of the DOM, no window
+globals.  Sometimes it has to be done, but the idea is to make the intrusion as
+small as possible.
 
 - Each module should separate the logic and presentation as much as possible.
 
@@ -21,9 +26,13 @@ provide the module's functionality.
 
 ##Dependancies
 
-Right now the only dependancy is jQuery.  This is not really in line with the
-ideology, so future expansion to remove all jQuery usage is in the cards.  For
-now I'm going to give in and make use of it for expediency.
+The first dependancy is jQuery.  This is not really in line with the ideology,
+so future expansion to remove all jQuery usage is in the cards.  For now I'm
+going to give in and make use of it for expediency.
+
+The next dependancy is Font Awesome.  This dependancy only applies if you want
+to use icons in the toolbar component.  It shouldn't be too difficult to rip
+it out and set up some iconography via images though.
 
 You could call Require a pseudo-dependancy I suppose, but you can rip out the
 modules and assign to variables explicitly and forego the entire AMD stuff.
