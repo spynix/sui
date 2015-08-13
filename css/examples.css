@@ -1,11 +1,10 @@
 body {
-  background-color: #a0a0a0;
+  background-color: #d0d0d0;
 }
   
 .container {
-  width: 80%;
-  height: 40%;
-  background-color: #d0d0d0;
+	width: 80%;
+	min-width: 640px;
   padding: 0;
   margin-bottom: 16px;
 }

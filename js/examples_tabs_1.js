@@ -8,7 +8,7 @@ require.config({
 require(["jquery", "tabs"], function($, tabs) {
 	var tabber1, tabber2;
 	
-	tabber1 = tabs.create($("#container1 > #controller"), $("#container1 > #viewport"), [
+	tabber1 = tabs.create(document.getElementById("controller1"), document.getElementById("viewport1"), [
 	  {
 		  title: "Tab #1",
 		  content: "This is the first tab created."
@@ -27,7 +27,7 @@ require(["jquery", "tabs"], function($, tabs) {
 	  }
 	], {});
 	
-	tabber2 = tabs.create($("#container2 > #controller"), $("#container2 > #viewport"), [
+	tabber2 = tabs.create(document.getElementById("controller2"), document.getElementById("viewport2"), [
 	  {
 		  title: "Bacon",
 		  content: "It's what's for breakfast."
@@ -48,4 +48,9 @@ require(["jquery", "tabs"], function($, tabs) {
 	
 	tabber1.remove_tab(1);
 	tabber1.add_tab("A New Tab", "This was a tab added after tabber creation through use of the control expression returned to the tabber1 variable.");
+	
+	tabber2.add_tab("Default", "This tab is selected by default manually via tabber2->click.  This is the intended behavior because it's possible to create a tabber with no tabs initially, so it's not always possible to \"default select\" the first tab.");
+	
+	tabber1.get_tab(0).click();
+	tabber2.get_tab(4).click();
 });
