@@ -26,17 +26,18 @@ provide the module's functionality.
 
 ##Dependancies
 
-The first dependancy is jQuery.  This is not really in line with the ideology,
-so future expansion to remove all jQuery usage is in the cards.  For now I'm
-going to give in and make use of it for expediency.
+- jQuery: This is not really in line with the ideology, so future expansion to
+remove all jQuery usage is in the cards.  For now I'm going to give in and make
+use of it for expediency.  I don't make particularly heavy use of it either.
 
-The next dependancy is Font Awesome.  This dependancy only applies if you want
-to use icons in the toolbar component.  It shouldn't be too difficult to rip
-it out and set up some iconography via images though.
+- Font-Awesome: So far this dependancy only applies if you want to use icons in
+the toolbar component.  It shouldn't be too difficult to rip it out and set up
+some iconography via images or something though.
 
-You could call Require a pseudo-dependancy I suppose, but you can rip out the
-modules and assign to variables explicitly and forego the entire AMD stuff.
-Everything can be situational, so if you don't want to replicate it then don't.
+- Require: You could call this a pseudo-dependancy I suppose, but it's easy
+enough to take the modules and assign them to variables explicitly and forego
+the AMD design.  Everything can be situational, so if you don't want it then
+don't use it.
 
 ##License
 
