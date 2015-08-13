@@ -1,0 +1,81 @@
+/*   File:
+ * Author: spynix
+ */
+
+
+@charset "utf-8";
+
+
+.tab_control {
+}
+
+
+.controls {
+/*
+  border-top: 1px solid #202020;
+  border-left: 1px solid #202020;
+  border-right: 1px solid #202020;
+*/
+  padding-left: 32px;
+  padding-right: 32px;
+  vertical-align: bottom;
+}
+
+
+.tab {
+  transition-delay: 0ms;
+  transition-duration: 200ms;
+  transition-property: all;
+  display: inline-block;
+  vertical-align: bottom;
+  padding: 4px 8px;
+  margin: 0;
+  margin-bottom: -1px;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 1.0em;
+  font-weight: normal;
+  text-align: center;
+  list-style-type: none;
+  border-top: 1px solid #202020;
+  border-left: 1px solid #202020;
+  border-bottom: 1px solid #202020;
+  background-color: #d0d0d0;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 240px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  z-index: 3;
+}
+
+
+.tab.static-size {
+  width: 64px;
+}
+
+
+.tab:last-child {
+  border-right: 1px solid #202020;
+}
+
+
+.tab:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+
+.tab.active {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+
+.viewport {
+  background-color: #f0f0f0;
+  padding: 4px;
+  border: 1px solid #202020;
+  min-width: 100px;
+  min-height: 100px;
+  z-index: 2;
+}
