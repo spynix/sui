@@ -46,6 +46,9 @@ define(["jquery"], function($) {
         if (!controller || !viewport)
           return false;
         
+        $(controller).addClass("controls");
+        $(viewport).addClass("viewport");
+        
         var control = (function(controller, viewport, top_id) {
           var id = top_id;
           var top_tab_id = 0;
@@ -114,6 +117,10 @@ define(["jquery"], function($) {
           control.add_tab(tabs[i].title, tabs[i].content);
 
         return control;
+      },
+      
+      get_top_id: function() {
+	      return top_control_id;
       }
     };
   })();
