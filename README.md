@@ -18,11 +18,12 @@ plain stupid sounding.  So I simply settled on Spynix's UI for now.
   The idea was for a legacy style toolbar with only icons and tooltips.  The
   fact text is assignable to each tool is simply a bonus.
   
-  You can add and remove tools as desired, but there's currently no way to
+  - You can add and remove tools as desired, but there's currently no way to
   explicitly remove tooltips once created yet, so if you remove a tool from a
   toolbar it will orphan the tooltip.
   
 - Tooltip
+  - As stated above, they work but there's no way to remove them once created.
 
 ##Ideology
 
