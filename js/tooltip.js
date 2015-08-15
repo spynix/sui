@@ -145,8 +145,9 @@ define(["jquery"], function($) {
         case "n": /* fall through */
         default:
           container_top = hook_bounds.top - distance - container_height;
+          container_top += window.scrollY;
           container_left = Math.round(hook_center - Math.round(container_width / 2));
-
+          container_left += window.scrollX;
           break;
         case "ne":
           break;
