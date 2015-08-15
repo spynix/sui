@@ -1,4 +1,4 @@
-﻿/*   File: toolbar.js
+/*   File: toolbar.js
  * Author: Jin Savage ("spynix")
  * 
  * 
@@ -86,14 +86,14 @@ define(["jquery", "tooltip"], function($, tooltip) {
             
             add_tool: function(icon, text) {
               var tool = document.createElement("div");
-              var span, spacer;
+              var span, spacer, txt;
 
               tool.id = "tool_" + top_tool_id.toString();
               tool.className = "tool";
               
               if (icon) {
                 span = document.createElement("span");
-                span.className = "fa fa-fw " + icon;
+                span.className = "icon fa fa-fw " + icon;
 
                 tool.appendChild(span);
               }
@@ -105,7 +105,10 @@ define(["jquery", "tooltip"], function($, tooltip) {
                   tool.appendChild(spacer);
                 }
 
-                tool.appendChild(document.createTextNode("" + text));
+                txt = document.createElement("span");
+                txt.className = "text";
+                txt.appendChild(document.createTextNode("" + text));
+                tool.appendChild(txt);
               }
 
               bar.appendChild(tool);
@@ -123,7 +126,7 @@ define(["jquery", "tooltip"], function($, tooltip) {
         top_toolbar_id++;
         
         for (i = 0, l = tools.length; i < l; i++) {
-          temp = toolbar.add_tab(tools[i].icon, tools[i].text);
+          temp = toolbar.add_tool(tools[i].icon, tools[i].text);
           
           if (tools[i].tooltip)
             tooltip(temp, tools[i].tooltip);
