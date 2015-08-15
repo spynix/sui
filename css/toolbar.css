@@ -1,0 +1,43 @@
+/*   File:
+ * Author: spynix
+ */
+
+
+@charset "utf-8";
+
+
+.toolbar {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #202020;
+  background-color: #e0e0e0;
+}
+
+
+.toolbar .tool {
+  margin: 2px;
+  padding: 2px 4px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 24px;
+  min-height: 24px;
+  border: 1px solid #606060;
+  background-color: #f0f0f0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.toolbar .tool:hover {
+  background-color: #ffffff;
+}
+
+
+.toolbar .tool span {
+  vertical-align: middle;
+}
+
+
+.toolbar .tool .spacer {
+  margin: 0 2px;
+}
