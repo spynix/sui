@@ -1,14 +1,14 @@
 ﻿#SUI - Spynix's UI
 
-This UI code is not particularly robust, nor is it full of the expansive
-features found in popular packages.  The purpose of it is to fill a smaller
-niche, while including many (some?) popular UI functions.  I like to call it
+This UI package is not particularly robust, nor is it full of the expansive
+features found in popular frameworks.  The purpose of it is to fill a smaller
+niche, while including many (some?) popular UI functions.  I call it
 "reinventing the wheel... only rounder." ;p
 
 I wanted to call the library something like Simple UI or Standalone UI or the
 like.  Problem is, those names are either so common they're definitely already
 taken, they're too long for me to bother typing repeatedly, or they're just
-plain stupid sounding.  So I simply settled on Spynix's UI for now.
+plain stupid sounding.  So I settled on Spynix's UI for now.
 
 ##Available Components
 - Tabs
