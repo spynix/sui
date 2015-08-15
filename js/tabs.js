@@ -49,7 +49,7 @@ define(["jquery"], function($) {
         $(controller).addClass("controls");
         $(viewport).addClass("viewport");
         
-        var control = (function(controller, viewport, top_id) {
+        control = (function(controller, viewport, top_id) {
           var id = top_id;
           var top_tab_id = 0;
           var tablist = [];
