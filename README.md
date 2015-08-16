@@ -1,9 +1,12 @@
 ﻿#SUI - Spynix's UI
 
 This UI package is not particularly robust, nor is it full of the expansive
-features found in popular frameworks.  The purpose of it is to fill a smaller
-niche, while including many (some?) popular UI functions.  I call it
-"reinventing the wheel... only rounder." ;p
+features found in popular frameworks.  It fills a smaller niche, while including
+some of the popular UI functions.  I call it "reinventing the wheel... only
+rounder." ;p
+
+But no, really... at present this is more of a personal experiment in my free
+time than anything else.
 
 I wanted to call the library something like Simple UI or Standalone UI or the
 like.  Problem is, those names are either so common they're definitely already
