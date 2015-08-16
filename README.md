@@ -48,8 +48,11 @@ provide the module's functionality.
 ##Dependancies
 
 - jQuery: This is not really in line with the ideology, so future expansion to
-remove all jQuery usage is in the cards.  For now I'm going to give in and make
-use of it for expediency, but I don't make particularly heavy use of it.
+remove all jQuery usage may be in the cards.  For now I'm going to give in and
+make use of it for expediency.  I don't make particularly heavy use of it, but
+the places where I do, it would be jackassy headaches to write my own versions
+of what I use it for.  I don't like relying on jQuery but it's just as likely
+I'll cave and not remove it.  1:1 odds on each.
 
 - Font-Awesome: So far this dependancy only applies if you want to use icons in
 the toolbar component.  It shouldn't be too difficult to rip it out and set up
