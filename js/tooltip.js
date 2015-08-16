@@ -1,4 +1,4 @@
-﻿/*   File: tooltip.js
+/*   File: tooltip.js
  * Author: Jin Savage ("spynix")
  * 
  * 
@@ -146,20 +146,40 @@ define(["jquery"], function($) {
         default:
           container_top = hook_bounds.top - distance - container_height;
           container_top += window.scrollY;
+          
           container_left = Math.round(hook_center - Math.round(container_width / 2));
           container_left += window.scrollX;
+          
           break;
         case "ne":
           break;
         case "e":
+          container_top = Math.round(hook_middle - Math.round(container_height / 2));
+          container_top += window.scrollY;
+          
+          container_left = hook_bounds.right + distance;
+          container_left += distance;
+          
           break;
         case "se":
           break;
         case "s":
+          container_top = hook_bounds.bottom + distance;
+          container_top += window.scrollY;
+          
+          container_left = Math.round(hook_center - Math.round(container_width / 2));
+          container_left += window.scrollX;
+          
           break;
         case "sw":
           break;
         case "w":
+          container_top = Math.round(hook_middle - Math.round(container_height / 2));
+          container_top += window.scrollY;
+          
+          container_left = hook_bounds.left - distance - container_width;
+          container_left += window.scrollX;
+          
           break;
         case "nw":
           break;
@@ -186,7 +206,8 @@ define(["jquery"], function($) {
       
       $(element).wrap('<div class="tooltip-hook"></div>');
       hook = element.parentElement;
-
+      
+      /* can probably just set display: hidden here and save some cycles */
       $(container).fadeOut({ duration: 0 });
       
       $(hook).on("mouseenter", (function(hook, container, vector, duration, transition, distance) {
