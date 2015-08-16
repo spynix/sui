@@ -38,12 +38,14 @@ make the intrusion as small as possible.
 This means utilizing stylesheeting as much as possible rather than inline
 styling.
 
-- Each module should return a properly closed group of utility functions which
-provide the module's functionality.
-  - Each module should have a create function which is the primary method of the
-  module.  This should return either an object or a properly closed expression
-  which itself contains all the necessary data and becomes the primary method
-  for controlling the component.
+- Each module should return a closured expression which provides the module's
+functionality.  This makes it possible to always maintain the component count,
+which is important for indexing.
+
+- Each module should have a create function which is the primary method of the
+module.  This should return either an object or a properly closed expression
+which itself contains all the necessary data and becomes the primary method
+for controlling the component.  (tooltips are currently a failure on this point)
 
 ##Dependancies
 
