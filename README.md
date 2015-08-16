@@ -14,6 +14,8 @@ taken, they're too long for me to bother typing repeatedly, or they're just
 plain stupid sounding.  So I settled on Spynix's UI for now.
 
 ##Available Components
+- Accordion
+
 - Tabs
 
 - Toolbar
