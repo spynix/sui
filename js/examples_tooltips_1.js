@@ -40,7 +40,8 @@ require.config({
 require(["jquery", "tooltip"], function($, tooltip) {
 	$(".tipme").each(function(index) {
 		tooltip(this, {
-			content: "This is tooltip #" + (index + 1).toString()
+			content: "This is tooltip #" + (index + 1).toString(),
+			vector: (90 * index)
 		});
 	});
 });
