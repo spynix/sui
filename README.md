@@ -34,6 +34,8 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
   
 - Tooltip
   - As stated above, they work but there's no way to remove them once created.
+  - Tooltips currently do not *RE*position themselves to prevent occlusion of the
+  tooltip by the viewport.  This is desired, simply not written yet.
 
 ##Ideology
 
