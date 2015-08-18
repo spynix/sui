@@ -88,10 +88,10 @@ define(["jquery"], function($) {
       connector: "line",              /* the graphical connector made between the tooltip and the element */
       show_delay: 400,                /* wait period before showing the tooltip */
       show_timeout: null,             /* reference to the timeout function for show */
-      show_transition: 400,           /* transition time from transparent to opaque */
+      show_transition: 250,           /* transition time from transparent to opaque */
       hide_delay: 400,                /* wait period before hiding the tooltip */
       hide_timeout: null,             /* reference to the timeout function for hide */
-      hide_transition: 400            /* transition time from opaque to transparent */
+      hide_transition: 250            /* transition time from opaque to transparent */
     };
     
     
