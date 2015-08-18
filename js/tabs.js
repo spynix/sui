@@ -98,6 +98,10 @@ define(["jquery"], function($) {
 
           get_tabs: function() {
             return tablist;
+          },
+          
+          num_tabs: function() {
+            return tablist.length;
           }
         };
       })(controller, viewport, top_id);
@@ -171,6 +175,10 @@ define(["jquery"], function($) {
 
           get_tabs: function() {
             return tablist;
+          },
+          
+          num_tabs: function() {
+            return tablist.length;
           }
         };
       })(controller, viewport, top_id);
@@ -195,6 +203,10 @@ define(["jquery"], function($) {
         
         for (i = 0, l = tabs.length; i < l; i++)
           control.add_tab(tabs[i].title, tabs[i].content);
+        
+        /* if we have at least one tab in our list, click the first one by default */
+        if (control.num_tabs() >= 1)
+          $(control.get_tab(0)).click();
 
         return control;
       },
