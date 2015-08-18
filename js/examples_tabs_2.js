@@ -55,16 +55,14 @@ require(["jquery", "tabs"], function($, tabs) {
 	  }
 	], { persistent: true });
 	
-	$(tabber1.get_tab(0)).click();
-	
 	tabber2 = tabs.create(document.getElementById("controller2"), document.getElementById("viewport2"), [
 	  {
-		  title: "Whee",
-		  content: "asdfasdfasdfasdf"
+		  title: "Nested Tab #1",
+		  content: "This is a tab nested inside another tab control."
 	  },
 	  {
-		  title: "Fdsa",
-		  content: "fdsafdsafdsafdsa"
+		  title: "Nested Tab #2",
+		  content: "Yet more nested tab contents for your viewing pleasure."
 	  }
 	], {});
 });

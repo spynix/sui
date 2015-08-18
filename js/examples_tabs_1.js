@@ -83,6 +83,14 @@ require(["jquery", "tabs"], function($, tabs) {
 	
 	tabber2.add_tab("Default", "This tab is selected by default manually via tabber2->click.  This is the intended behavior because it's possible to create a tabber with no tabs initially, so it's not always possible to \"default select\" the first tab.");
 	
-	tabber1.get_tab(0).click();
+  /* forcing a click to the first tab is not necessary because the control will
+   * automatically select the first indexed tab in the list upon creation if you
+   * create a control with at least one tab 
+   */
+//	tabber1.get_tab(0).click();
+
+  /* this is necessary to make the default selected tab something other than the
+   * first indexed tab
+   */
 	tabber2.get_tab(4).click();
 });
