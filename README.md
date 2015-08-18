@@ -1,4 +1,4 @@
-﻿#SUI - Spynix's UI
+#SUI - Spynix's UI
 
 This UI package is not particularly robust, nor is it full of the expansive
 features found in popular frameworks.  It fills a smaller niche, while including
@@ -17,6 +17,11 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
 - Accordion
 
 - Tabs
+  - The tab control supports reusing a single dom element as the viewport, or
+  with the persistence option will generate separate views for each tab contents
+  and swap between them to maintain an active DOM presence.  This allows for
+  functionality like nested controls.  Not necessary for static data, but
+  needed for referencing (to prevent scope out).
 
 - Toolbar
   - The toolbar component will automatically inherit the tooltip component.
@@ -31,6 +36,16 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
   - As stated above, they work but there's no way to remove them once created.
 
 ##Ideology
+
+- First and foremost, each module should be reasonably small and simple.  Large
+frameworks are great.  A good number of people have spent a lot of time and
+effort making them work well.  Sometimes though, and I know this is just silly
+and all but... you don't *always* want stuff to look or work just like theirs.
+You try changing *d* which in turn breaks *e, f, g, h, i*... either by mucking
+up the inheritance or worse the actual functionality.  Rather than a fully built
+framework that you have to work backwards to modify, this is meant to handle
+only the lowest level of functionality -- just enough for it to work, not enough
+to be cool -- and then be built up from that point.
 
 - Each module should be self-sufficient without relying on custom data assigned
 to nodes or window globals.  Sometimes it has to be done, but the idea is to
