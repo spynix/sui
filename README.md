@@ -33,10 +33,17 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
   toolbar it will orphan the tooltip.
   
 - Tooltip
-  - As stated above, they work but there's no way to remove them once created.
+  - As stated above, they work but there's no way to remove them cleanly once
+  created.
   
   - Tooltips currently do not **RE**position themselves to prevent occlusion of the
   tooltip by the viewport.  This is desired, simply not written yet.
+  
+  - The tooltips currently also feel like those really lame tooltips you find
+  on websites every so often.  I think this is mostly because even if you leave
+  a mouseover target before the "show this element's tooltip" function starts,
+  it won't cancel showing it.  ...it might also help to have the connectors
+  working too.  Just thinking out loud.
 
 ##Ideology
 
