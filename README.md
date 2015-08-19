@@ -34,7 +34,8 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
   
 - Tooltip
   - As stated above, they work but there's no way to remove them once created.
-  - Tooltips currently do not *RE*position themselves to prevent occlusion of the
+  
+  - Tooltips currently do not **RE**position themselves to prevent occlusion of the
   tooltip by the viewport.  This is desired, simply not written yet.
 
 ##Ideology
@@ -43,7 +44,7 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
 frameworks are great.  A good number of people have spent a lot of time and
 effort making them work well.  Sometimes though, and I know this is just silly
 and all but... you don't *always* want stuff to look or work just like theirs.
-You try changing *d* which in turn breaks *e, f, g, h, i*... either by mucking
+You try changing **d** which in turn breaks **e**, **f**, **g**, **h**, **i**... either by mucking
 up the inheritance or worse the actual functionality.  Rather than a fully built
 framework that you have to work backwards to modify, this is meant to handle
 only the lowest level of functionality -- just enough for it to work, not enough
