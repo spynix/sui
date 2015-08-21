@@ -158,7 +158,7 @@ define(["jquery"], function($) {
       }
       
       return (function(index_row, viewport, columns, element_row, renderers) {
-        return {
+        return { /* row public API */
           get_cell: function(index) {
             return cells[index];
           },
@@ -232,7 +232,7 @@ define(["jquery"], function($) {
       var data;
       
       return (function(index_row, index_cell, label, element_row, element_cell, renderer) {
-        return {
+        return { /* cell public API */
           get_element: function() {
             return element;
           },
@@ -365,6 +365,28 @@ define(["jquery"], function($) {
         update();
       }
       
+      function adjust_row_heights(index) {
+        var row = rows[index];
+        var top = 0;
+        var i, l, cell, height;
+        
+        for (i = 0, l = row.num_cells(); i < l; i++) {
+          cell = row.get_cell(i).get_element();
+          height = $(cell).height();
+          
+          if (height > top)
+            top = height;
+        }
+        
+        top = Math.min(top, config.cells.max_height);
+        
+        for (i = 0, l = row.num_cells(); i < l; i++) {
+          cell = row.get_cell(i).get_element();
+          
+          $(cell).height(top);
+        }
+      }
+      
       function adjust_header_heights() {
         var top_height = 0;
         var height;
@@ -382,32 +404,15 @@ define(["jquery"], function($) {
       }
       
       function adjust_cell_heights() {
-        var i, j, k, l, row, cell, height;
-        var top_height = 0;
+        var i, j;
         
-        for (i = 0, j = rows.length; i < j; i++) {
-          row = rows[i];
-          
-          for (k = 0, l = row.num_cells(); k < l; k++) {
-            cell = row.get_cell(k).get_element();
-            height = $(cell).height();
-            
-            if (height > top_height)
-              top_height = height;
-          }
-        }
-        
-        top_height = Math.min(top_height, config.cells.max_height);
-        
-        for (i = 0, j = rows.length; i < j; i++) {
-          row = rows[i];
-          
-          for (k = 0, l = row.num_cells(); k < l; k++) {
-            cell = row.get_cell(k).get_element();
-            
-            $(cell).height(top_height);
-          }
-        }
+        for (i = 0, j = rows.length; i < j; i++)
+          adjust_row_heights(i);
+      }
+      
+      function adjust_heights() {
+        adjust_cell_heights();
+        adjust_header_heights();
       }
       
       function adjust_widths() {
@@ -458,6 +463,7 @@ define(["jquery"], function($) {
       function adjust_cell_dimensions() {
         var i, j, k, l, row, cell;
         
+        /* reset any past inline width/height style settings */
         for (i = 0, j = rows.length; i < j; i++) {
           row = rows[i];
           
@@ -468,14 +474,12 @@ define(["jquery"], function($) {
           }
         }
         
-        adjust_widths();
-        adjust_cell_heights();
-        
-        /* i don't THINK we need to remove width/heights from header-cells
+        /* i don't THINK we need to remove heights from header-cells
          * since they won't change, but i may prove myself wrong.  for now
-         * not doing anything
+         * im not doing anything to them
          */
-        adjust_header_heights();
+        adjust_widths();
+        adjust_heights();
       }
 
       /* render():
@@ -520,7 +524,7 @@ define(["jquery"], function($) {
       }
       
       return (function(element, columns, top_id, conf) {
-        return {
+        return { /* grid public API */
           init: function() {
             var i, l, temp;
 
@@ -668,7 +672,7 @@ define(["jquery"], function($) {
          * automatically handled inside the grid expression when the user,
          * either explicitly or through the UI, changes the number of rows per
          * page.  each row then in turn is responsible for the generation of
-         * its own cells, so likewise, the grid itself can't directly create
+         * its own cells, so likewise, the grid itself doesn't directly create
          * cells.
          * 
          * also, if header, viewport, and footer aren't initialized for whatever
