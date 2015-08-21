@@ -85,6 +85,14 @@ define(["jquery"], function($) {
       return div;
     }
     
+    function create_content() {
+      var div = document.createElement("div");
+      
+      div.className = "sui-grid-contents";
+      
+      return div;
+    }
+    
     function create_paginator() {
       var div = document.createElement("div");
       
@@ -293,13 +301,10 @@ define(["jquery"], function($) {
       var rows = [];
       var data = {};
       var modifying = true;
-      var header, viewport, paginator, footer;
+      var contents, header, viewport, paginator, footer;
       
       function add_rows(quantity) {
         var i, l, temp;
-        
-        console.log("add_rows(" + quantity.toString() + "):");
-        console.log("  starting rows length: " + rows.length);
         
         if (quantity <= 0)
           return false;
@@ -310,7 +315,6 @@ define(["jquery"], function($) {
           rows.push(temp);
         }
         
-        console.log("  ending rows length: " + rows.length);
         return true;
       }
       
@@ -320,15 +324,11 @@ define(["jquery"], function($) {
         if (quantity <= 0)
           return false;
         
-        console.log("remove_rows(" + quantity.toString() + "):");
-        console.log("  starting rows length: " + rows.length);
-        
         for (i = (rows.length - quantity), l = rows.length; i < l; i++)
           rows[i].remove();
         
         rows.splice((rows.length - quantity), quantity);
         
-        console.log("  ending rows length: " + rows.length);
         return true;
       }
       
@@ -345,8 +345,6 @@ define(["jquery"], function($) {
         
         modifying = true;
         
-        console.log("Quantity: " + quantity + "    paging.size: " + config.paging.size);
-        
         if (quantity == config.paging.size) { /* do nothing, but we didn't error out */
           modifying = false;
           return true;
@@ -357,7 +355,7 @@ define(["jquery"], function($) {
           if (add_rows(quantity - config.paging.size))
             config.paging.size = quantity;
         } else {
-          console.log("Something went really wrong.");
+          console.log("Something went really wrong in adjusting the grid's number of rows.");
         }
         
         modifying = false;
@@ -536,9 +534,13 @@ define(["jquery"], function($) {
               paginator = create_paginator();
             
             footer = create_footer();
-
-            element.appendChild(header);
-            element.appendChild(viewport);
+            
+            contents = create_content();
+            
+            contents.appendChild(header);
+            contents.appendChild(viewport);
+            
+            element.appendChild(contents);
             
             if (config.paging.active)
               element.appendChild(paginator);
