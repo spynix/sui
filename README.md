@@ -16,6 +16,9 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
 ##Available Components
 - Accordion
 
+- Grid
+  - This is a work in progress.
+
 - Tabs
   - The tab control supports reusing a single dom element as the viewport, or
   with the persistence option will generate separate views for each tab contents
@@ -43,7 +46,7 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
   on websites every so often.  I think this is mostly because even if you leave
   a mouseover target before the "show this element's tooltip" function starts,
   it won't cancel showing it.  ...it might also help to have the connectors
-  working too.  Just thinking out loud.
+  working too.  Just saying...
 
 ##Ideology
 
@@ -52,7 +55,7 @@ frameworks are great.  A good number of people have spent a lot of time and
 effort making them work well.  Sometimes though, and I know this is just silly
 and all but... you don't *always* want stuff to look or work just like theirs.
 You try changing **d** which in turn breaks **e**, **f**, **g**, **h**, **i**... either by mucking
-up the inheritance or worse the actual functionality.  Rather than a fully built
+up the inheritance or worse actual functionality.  Rather than a fully built
 framework that you have to work backwards to modify, this is meant to handle
 only the lowest level of functionality -- just enough for it to work, not enough
 to be cool -- and then be built up from that point.
