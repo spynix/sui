@@ -1,0 +1,196 @@
+/*   File: grid.css
+ * Author: Jin Savage ("spynix")
+ * 
+ * 
+ * License - 2-clause ("simplified") BSD
+ * ----------------------------------------------------------------------------
+ * 
+ * Copyright (c) 2015, Jin Savage ("spynix")
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+@charset "utf-8";
+
+
+.sui-grid {
+  font-size: 1.0em;
+  font-weight: normal;
+  font-family: Tahoma, sans-serif;
+  border: 1px solid #606060;
+}
+
+
+.sui-grid .sui-grid-header {
+  display: block;
+  background-color: #ccccff;
+  border-bottom: 1px solid #606060;
+  white-space: nowrap;
+}
+
+
+.sui-grid .sui-grid-header .sui-grid-header-cell {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+  min-width: 24px;
+  min-height: 24px;
+  margin: 0;
+  padding: 4px 8px;
+  border-right: 1px solid #606060;
+  white-space: normal;
+}
+
+
+.sui-grid .sui-grid-header .sui-grid-header-cell:last-child {
+  border-right: none;
+}
+
+
+.sui-grid .sui-grid-header .sui-grid-header-cell .sui-grid-header-cell-text {
+  display: block;
+  position: relative;
+  vertical-align: middle;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
+}
+
+
+.sui-grid .sui-grid-viewport {
+  display: block;
+  background-color: #f0f0f0;
+  overflow: auto;
+}
+
+
+.sui-grid .sui-grid-viewport .sui-grid-row {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #606060;
+  white-space: nowrap;
+}
+
+.sui-grid .sui-grid-viewport .sui-grid-row:last-child {
+  border-bottom: none;
+}
+
+
+.sui-grid .sui-grid-viewport .sui-grid-row .sui-grid-cell {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  border-right: 1px solid #606060;
+  min-width: 24px;
+  min-height: 16px;
+  max-width: 300px;
+  max-height: 100px;
+  padding: 4px 8px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+
+.sui-grid .sui-grid-viewport .sui-grid-row .sui-grid-cell:last-child {
+  border-right: none;
+}
+
+
+.sui-grid .sui-grid-paginator {
+  display: block;
+  background-color: #ccccff;
+  text-align: center;
+  width: 100%;
+  min-height: 32px;
+  border-top: 1px solid #606060;
+}
+
+
+.sui-grid .sui-grid-paginator .sui-grid-paginator-cell {
+  font-size: 0.75em;
+  min-height: 24px;
+  min-width: 24px;
+  border: 1px solid #606060;
+}
+
+
+.sui-grid .sui-grid-paginator .sui-grid-paginator-cell:hover {
+  background-color: #ffffff;
+}
+
+
+.sui-grid .sui-grid-footer {
+  display: block;
+  background-color: #ccccff;
+  min-height: 24px;
+  width: 100%;
+  border-top: 1px solid #606060;
+}
+
+
+/* rows per page */
+.sui-grid .sui-grid-footer .rpp {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 4px;
+  margin: 4px;
+}
+
+
+.sui-grid form {
+  margin: 0;
+}
+
+
+.sui-grid label, .sui-grid input[type="text"] {
+  margin: 0 4px;
+  display: inline-block;
+  vertical-align: middle;
+  outline: 0;
+}
+
+
+.sui-grid label {
+  vertical-align: top;
+}
+
+
+.sui-grid input[type="text"] {
+  text-align: center;
+  width: 48px;
+}
+
+
+.sui-grid input[type="text"] {
+  border: 1px solid #606060;
+}
+
+
+.sui-grid input[type="text"]:focus {
+  border: 1px solid #90b0ff;
+}
