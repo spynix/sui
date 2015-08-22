@@ -34,6 +34,7 @@
 
 
 .sui-grid {
+  position: relative;
   font-size: 1.0em;
   font-weight: normal;
   font-family: Tahoma, sans-serif;
@@ -44,8 +45,6 @@
 .sui-grid .sui-grid-contents {
   display: block;
   position: relative;
-  width: 100%;
-  right: 0;
   margin: 0;
   padding: 0;
   overflow-x: auto;
@@ -57,6 +56,7 @@
   display: block;
   position: relative;
   float: left;
+  width: 100%;
   background-color: #ccccff;
   border-bottom: 1px solid #606060;
   white-space: nowrap;
