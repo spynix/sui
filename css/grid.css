@@ -42,17 +42,32 @@
 
 
 .sui-grid .sui-grid-contents {
+  display: block;
   margin: 0;
   padding: 0;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 
 .sui-grid .sui-grid-contents .sui-grid-header {
   display: block;
+  float: left;
+  position: relative;
   background-color: #ccccff;
   border-bottom: 1px solid #606060;
   white-space: nowrap;
+}
+
+
+.sui-grid .sui-grid-contents .sui-grid-header:after {
+  content: "";
+  clear: both;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  line-height: 0;
 }
 
 
@@ -91,16 +106,36 @@
 
 .sui-grid .sui-grid-contents .sui-grid-viewport {
   display: block;
+  float: left;
+  position: relative;
   background-color: #f0f0f0;
+  white-space: nowrap;
+}
+
+
+.sui-grid .sui-grid-contents .sui-grid-viewport:after {
+  content: "";
+  clear: both;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  line-height: 0;
 }
 
 
 .sui-grid .sui-grid-contents .sui-grid-viewport .sui-grid-row {
   display: block;
-  width: 100%;
+  background-color: #f0f0f0;
   border-bottom: 1px solid #606060;
   white-space: nowrap;
 }
+
+
+.sui-grid .sui-grid-contents .sui-grid-viewport .sui-grid-row:hover {
+  background-color: #ffffff;
+}
+
 
 .sui-grid .sui-grid-contents .sui-grid-viewport .sui-grid-row:last-child {
   border-bottom: none;
