@@ -43,6 +43,9 @@
 
 .sui-grid .sui-grid-contents {
   display: block;
+  position: relative;
+  width: 100%;
+  right: 0;
   margin: 0;
   padding: 0;
   overflow-x: auto;
@@ -52,8 +55,8 @@
 
 .sui-grid .sui-grid-contents .sui-grid-header {
   display: block;
-  float: left;
   position: relative;
+  float: left;
   background-color: #ccccff;
   border-bottom: 1px solid #606060;
   white-space: nowrap;
@@ -61,13 +64,16 @@
 
 
 .sui-grid .sui-grid-contents .sui-grid-header:after {
-  content: "";
+  content: " ";
+  display: block;
+  visibility: hidden;
   clear: both;
   font-size: 0;
   margin: 0;
   padding: 0;
   border: 0;
   line-height: 0;
+  height: 0;
 }
 
 
@@ -114,13 +120,16 @@
 
 
 .sui-grid .sui-grid-contents .sui-grid-viewport:after {
-  content: "";
+  content: " ";
+  display: block;
+  visibility: hidden;
   clear: both;
   font-size: 0;
   margin: 0;
   padding: 0;
   border: 0;
   line-height: 0;
+  height: 0;
 }
 
 
