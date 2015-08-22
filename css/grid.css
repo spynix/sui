@@ -199,15 +199,32 @@
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
+  text-align: center;
   margin: 4px;
   padding: 2px;
   font-size: 1.25em;
   font-weight: bold;
+  min-width: 0;
+  min-height: 0;
   height: 24px;
   width: 24px;
-  line-height: 24px;
   background-color: #f0f0f0;
   border: 1px solid #606060;
+}
+
+
+.sui-grid .sui-grid-paginator .sui-grid-paginator-cell .sui-grid-paginator-cell-text {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  margin-top: -1px;
+  padding: 0;
+  vertical-align: middle;
+  text-align: center;
+  border: none;
 }
 
 
@@ -233,12 +250,12 @@
   width: 16px;
   height: 2px;
   background-color: #606060;
+  visibility: hidden;
   border: none;
 }
 
 
-.sui-grid .sui-grid-paginator .sui-grid-paginator-cell.elipsis {
-  border: none;
+.sui-grid .sui-grid-paginator .sui-grid-paginator-cell.ellipsis {
 }
 
 
@@ -256,12 +273,45 @@
 }
 
 
+.sui-grid .sui-grid-footer:after {
+  content: " ";
+  display: block;
+  visibility: hidden;
+  clear: both;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  height: 0;
+}
+
+
 /* rows per page */
 .sui-grid .sui-grid-footer .rpp {
   display: inline-block;
+  position: relative;
+  float: left;
   vertical-align: middle;
   padding: 4px;
   margin: 4px;
+}
+
+
+.sui-grid .sui-grid-footer .page_number {
+  display: inline-block;
+  position: relative;
+  float: right;
+  vertical-align: middle;
+  padding: 4px;
+  margin: 4px;  
+}
+
+
+.sui-grid .sui-grid-footer .page_number .page_number_total {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 
