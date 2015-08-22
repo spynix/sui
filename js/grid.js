@@ -148,6 +148,47 @@ define(["jquery"], function($) {
       return div;
     }
     
+    function create_page_numbers(context, number) {
+      var div = document.createElement("div");
+      var form = document.createElement("form");
+      var label = document.createElement("label");
+      var input = document.createElement("input");
+      var total = document.createElement("div");
+
+      div.className = "page_number";
+      
+      form.id = "page_number_form";
+      form.action = "javascript:void(0);";
+      div.appendChild(form);
+      
+      label.htmlFor = "page_number_input";
+      label.innerHTML = "Page: ";
+      form.appendChild(label);
+      
+      input.name = "page_number_input";
+      input.type = "text";
+      input.id = "page_number_input";
+      input.value = number.toString();
+      
+      if (context) {
+        $(input).keypress(function(event) {
+          if (event.which == 13)
+            if (!isNaN(this.value) && (this.value >= 1))
+              context.set_page(parseInt(this.value, 10));
+        });
+      }
+      
+      label.appendChild(input);
+      
+      total.id = "grid_" + top_grid_id.toString() + "_page_number_total";
+      total.className = "page_number_total";
+      total.innerHTML = " of " + (1).toString();
+      
+      label.appendChild(total);
+      
+      return div;
+    }
+    
     function create_row_expression(index_row, viewport, column_list, element_row, renderers) {
       var row_index = index_row;
       var parent = viewport;
@@ -325,8 +366,25 @@ define(["jquery"], function($) {
        *   gives benchmarks
        */
       function flush_paginator() {
-        while(paginator.lastChild)
+        while (paginator.lastChild)
           paginator.removeChild(paginator.lastChild);
+      }
+      
+      function create_paginator_delimiter() {
+        var div = document.createElement("div");
+        
+        div.className = "sui-grid-paginator-cell delimiter";
+        
+        return div;
+      }
+      
+      function create_paginator_ellipsis() {
+        var div = document.createElement("div");
+        
+        div.className = "sui-grid-paginator-cell ellipsis inactive";
+        div.innerHTML = "<div class=\"sui-grid-paginator-cell-text\">...</div>";
+        
+        return div;
       }
       
       function create_paginator_cell(text, page, num_pages) {
@@ -334,14 +392,17 @@ define(["jquery"], function($) {
         
         div.className = "sui-grid-paginator-cell";
         div.name = "page_" + page.toString();
-        div.innerHTML = "" + text.toString();
+        div.innerHTML = "<div class=\"sui-grid-paginator-cell-text\">" + text.toString() + "</div>";
         
         if ((page >= 1) && (page <= num_pages)) {
-          $(div).on("click", (function(self) {
-            return function() {
-              self.set_page(page);
-            };
-          })(self));
+          if (page != config.paging.page)
+            $(div).on("click", (function(self) {
+              return function() {
+                self.set_page(page);
+              };
+            })(self));
+          else
+            $(div).addClass("inactive");
         } else {
           $(div).addClass("inactive");
         }
@@ -350,18 +411,53 @@ define(["jquery"], function($) {
       }
       
       function create_paginator_cells(num_pages) {
-        var cell;
+        var i, start, stop, cell;
         
         cell = create_paginator_cell("&laquo;", 1, num_pages);
+        
+        if (config.paging.page == 1)
+          $(cell).addClass("inactive");
+        
         paginator.appendChild(cell);
         
         cell = create_paginator_cell("&lsaquo;", config.paging.page - 1, num_pages);
         paginator.appendChild(cell);
         
-        cell = create_paginator_cell("&rsaquo;", config.paging.page + 1, num_pages);
+        cell = create_paginator_delimiter();
         paginator.appendChild(cell);
         
+        start = config.paging.page - 3;
+        stop = config.paging.page + 3;
+        
+        if ((start >= 2) && (num_pages >= 2)) {
+          cell = create_paginator_ellipsis();
+          paginator.appendChild(cell);
+        }
+        
+        for (i = start; (i <= stop) && (i <= num_pages); i++) {
+          if (i <= 0)
+            continue;
+          
+          cell = create_paginator_cell(i.toString(), i, num_pages);
+          paginator.appendChild(cell);
+        }
+        
+        if ((stop < num_pages)) {
+          cell = create_paginator_ellipsis();
+          paginator.appendChild(cell);
+        }
+        
+        cell = create_paginator_delimiter();
+        paginator.appendChild(cell);
+        
+        cell = create_paginator_cell("&rsaquo;", config.paging.page + 1, num_pages);
+        paginator.appendChild(cell);
+
         cell = create_paginator_cell("&raquo;", num_pages, num_pages);
+        
+        if (config.paging.page == num_pages)
+          $(cell).addClass("inactive");
+
         paginator.appendChild(cell);
       }
       
@@ -558,6 +654,19 @@ define(["jquery"], function($) {
         adjust_widths();
         adjust_heights();
       }
+      
+      function update_page_number() {
+        var overflow = 0;
+        var num_pages = 1;
+        
+        if (data.cache) {
+          overflow = (data.cache.length % config.paging.size);
+          num_pages = Math.floor((data.cache.length / config.paging.size) + (overflow ? 1 : 0));
+        }
+        
+        $(footer).find(".page_number_total").html(" of " + num_pages.toString());
+        $(footer).find("#page_number_input").val(config.paging.page);
+      }
 
       /* render():
        *   trickles the render command downwards eventually telling all
@@ -575,6 +684,8 @@ define(["jquery"], function($) {
         
         flush_paginator();
         populate_paginator();
+        
+        update_page_number();
         
         modifying = false;
       }
@@ -636,6 +747,7 @@ define(["jquery"], function($) {
             element.appendChild(footer);
             
             footer.appendChild(create_rows_per_page(self, config.paging.size));
+            footer.appendChild(create_page_numbers(self, config.paging.page));
             
             data.old = null;
             data.cache = null;
