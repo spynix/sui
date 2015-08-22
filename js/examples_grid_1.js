@@ -68,7 +68,6 @@ require(["jquery", "grid"], function($, grid) {
     async: true,
     dataType: "json",
     success: function(d) {
-      console.log(d);
       window.grid1.set_data(d);
     },
     error: function(xhr, status, err) {
