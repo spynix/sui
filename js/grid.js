@@ -31,6 +31,11 @@
  * 
  * Structure
  * ----------------------------------------------------------------------------
+ * 
+ * 
+ * Notes
+ * ----------------------------------------------------------------------------
+ * 
  */
 
 
@@ -201,14 +206,14 @@ define(["jquery"], function($) {
             for (i = 0, l = cells.length; i < l; i++) {
               label = cells[i].label();
               
-              if (d == undefined) {
-                cells[i].update(null);
-                console.log("row->update(): error: cells[" + i.toString() + "]: undefined");
+              if (d === undefined) {
+                cells[i].update("");
+                console.log("row->update(): error: cells[" + i.toString() + "]: data to assign undefined, assigned \"\"");
                 continue;
               }
 
-              if (d == null) { /* row in question didn't exist */
-                cells[i].update(null);
+              if (d == "") { /* row in question didn't exist */
+                cells[i].update("");
                 continue;
               }
 
@@ -301,7 +306,72 @@ define(["jquery"], function($) {
       var rows = [];
       var data = {};
       var modifying = true;
-      var contents, header, viewport, paginator, footer;
+      var contents, header, viewport, paginator, footer, self;
+      
+      /* flush_paginator():
+       *   remove all elements from the paginator
+       * 
+       *   http://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+       *   illuminates more about removal method, and http://jsperf.com/innerhtml-vs-removechild/15
+       *   gives benchmarks
+       */
+      function flush_paginator() {
+        while(paginator.lastChild)
+          paginator.removeChild(paginator.lastChild);
+      }
+      
+      function create_paginator_cell(text, page, num_pages) {
+        var div = document.createElement("div");
+        
+        div.className = "sui-grid-paginator-cell";
+        div.name = "page_" + page.toString();
+        div.innerHTML = "" + text.toString();
+        
+        if ((page >= 1) && (page <= num_pages)) {
+          $(div).on("click", (function(self) {
+            return function() {
+              self.set_page(page);
+            };
+          })(self));
+        } else {
+          $(div).addClass("inactive");
+        }
+        
+        return div;
+      }
+      
+      function create_paginator_cells(num_pages) {
+        var cell;
+        
+        cell = create_paginator_cell("&laquo;", 1, num_pages);
+        paginator.appendChild(cell);
+        
+        cell = create_paginator_cell("&lsaquo;", config.paging.page - 1, num_pages);
+        paginator.appendChild(cell);
+        
+        cell = create_paginator_cell("&rsaquo;", config.paging.page + 1, num_pages);
+        paginator.appendChild(cell);
+        
+        cell = create_paginator_cell("&raquo;", num_pages, num_pages);
+        paginator.appendChild(cell);
+      }
+      
+      function populate_paginator() {
+        var num_pages = 1;
+        var overflow;
+        
+        if (data.cache) {
+          overflow = (data.cache.length % config.paging.size);
+          num_pages = Math.floor((data.cache.length / config.paging.size) + (overflow ? 1 : 0));
+        }
+        
+        if (num_pages <= 0) {
+          console.log("populate_paginator(): error: num_pages <= 0");
+          return false;
+        }
+        
+        create_paginator_cells(num_pages);
+      }
       
       function add_rows(quantity) {
         var i, l, temp;
@@ -494,6 +564,9 @@ define(["jquery"], function($) {
         
         adjust_cell_dimensions();
         
+        flush_paginator();
+        populate_paginator();
+        
         modifying = false;
       }
 
@@ -514,7 +587,7 @@ define(["jquery"], function($) {
         modifying = true;
         
         for (i = 0, j = rows.length, k = bottom, l = top; (i < j) && (k < l); i++, k++)
-          rows[i].update((data.cache[k] !== null ? data.cache[k] : null));
+          rows[i].update(((data.cache[k] !== null) && (data.cache[k] !== undefined)) ? data.cache[k] : "");
         
         modifying = false;
 
@@ -525,13 +598,19 @@ define(["jquery"], function($) {
         return { /* grid public API */
           init: function() {
             var i, l, temp;
+            
+            /* this is important for setting up our events that'll be attached
+             * to anything we create inside here.
+             */
+            self = this;
 
             /* first create all the dom elements that our grid will rely on */
             header = create_header();
             viewport = create_viewport();
             
-            if (config.paging.active)
+            if (config.paging.active) {
               paginator = create_paginator();
+            }
             
             footer = create_footer();
             
