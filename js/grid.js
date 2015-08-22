@@ -114,7 +114,7 @@ define(["jquery"], function($) {
       return div;
     }
     
-    function create_rows_per_page(number) {
+    function create_rows_per_page(context, number) {
       var div = document.createElement("div");
       var form = document.createElement("form");
       var label = document.createElement("label");
@@ -134,6 +134,15 @@ define(["jquery"], function($) {
       input.type = "text";
       input.id = "rpp_input";
       input.value = number.toString();
+      
+      if (context) {
+        $(input).keypress(function(event) {
+          if (event.which == 13)
+            if (!isNaN(this.value) && (this.value >= 1))
+              context.rows_per_page(parseInt(this.value, 10));
+        });
+      }
+      
       form.appendChild(input);
       
       return div;
@@ -626,7 +635,7 @@ define(["jquery"], function($) {
             
             element.appendChild(footer);
             
-            footer.appendChild(create_rows_per_page(config.paging.size));
+            footer.appendChild(create_rows_per_page(self, config.paging.size));
             
             data.old = null;
             data.cache = null;

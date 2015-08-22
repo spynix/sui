@@ -73,10 +73,4 @@ require(["jquery", "grid"], function($, grid) {
     error: function(xhr, status, err) {
     }
   });
-  
-  $("#rpp_input").keypress(function(event) {
-    if (event.which == 13)
-      if (!isNaN(this.value) && (this.value >= 1))
-        window.grid1.rows_per_page(parseInt(this.value, 10));
-  });
 });
