@@ -589,8 +589,14 @@ define(["jquery"], function($) {
       }
       
       function adjust_widths() {
-        var i, j, k, l, row, cell, width;
+        var i, j, k, l, row, cell, width, percent;
+        var total_width, total_offset;
         var widths = [];
+        
+        percent = 10;
+        
+        total_width = 0;
+        total_offset = 0;
         
         for (i = 0, l = columns.length; i < l; i++) {
           widths[i] = 0;
@@ -609,6 +615,10 @@ define(["jquery"], function($) {
         }
         
         $(header).find(".sui-grid-header-cell").each(function(index) {
+          total_offset += parseInt($(this).css("marginLeft"), 10) + parseInt($(this).css("marginRight"), 10);
+          total_offset += parseInt($(this).css("borderLeftWidth"), 10) + parseInt($(this).css("borderRightWidth"), 10);
+          total_offset += parseInt($(this).css("paddingLeft"), 10) + parseInt($(this).css("paddingRight"), 10);
+          
           if ($(this).width() > widths[index])
             widths[index] = $(this).width();
         });
@@ -617,19 +627,37 @@ define(["jquery"], function($) {
           widths[i] = Math.min(widths[i], config.cells.max_width);
         }
         
+        for (i = 0, l = widths.length; i < l; i++)
+          total_width += widths[i];
+        
+        percent = (100 * (total_width / (total_width + total_offset))) / columns.length;
+        
         for (i = 0, j = rows.length; i < j; i++) {
           row = rows[i];
+          
+          $(row.get_element()).css("min-width", "" + (total_width + total_offset) + "px");
           
           for (k = 0, l = row.num_cells(); k < l; k++) {
             cell = row.get_cell(k).get_element();
             
-            $(cell).width(widths[k]);
+            $(cell).css({
+//              "width": "" + percent.toString() + "%",
+              "min-width": "" + widths[k].toString() + "px"
+            });
+//            $(cell).width(widths[k]);
           }
         }
         
+        $(header).css("min-width", "" + (total_width + total_offset) + "px");
+        
         $(header).find(".sui-grid-header-cell").each(function(index) {
-          $(this).width(widths[index]);
+          $(this).css({
+//            "width": "" + percent.toString() + "%",
+            "min-width": "" + widths[index].toString() + "px"
+          });
         });
+        
+        
       }
       
       /* header_widths done inside adjust_cell_widths() */
