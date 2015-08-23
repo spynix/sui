@@ -34,17 +34,16 @@
 
 
 .sui-grid {
-  position: relative;
   font-size: 1.0em;
   font-weight: normal;
   font-family: Tahoma, sans-serif;
   border: 1px solid #606060;
+  overflow: hidden;
 }
 
 
 .sui-grid .sui-grid-contents {
   display: block;
-  position: relative;
   margin: 0;
   padding: 0;
   overflow-x: auto;
@@ -79,6 +78,7 @@
 
 .sui-grid .sui-grid-contents .sui-grid-header .sui-grid-header-cell {
   display: inline-block;
+  position: relative;
   vertical-align: middle;
   text-align: center;
   font-weight: bold;
@@ -112,8 +112,6 @@
 
 .sui-grid .sui-grid-contents .sui-grid-viewport {
   display: block;
-  float: left;
-  position: relative;
   background-color: #f0f0f0;
   white-space: nowrap;
 }
@@ -135,6 +133,9 @@
 
 .sui-grid .sui-grid-contents .sui-grid-viewport .sui-grid-row {
   display: block;
+  position: relative;
+  float: left;
+  width: 100%;
   background-color: #f0f0f0;
   border-bottom: 1px solid #606060;
   white-space: nowrap;
@@ -247,8 +248,8 @@
   padding: 0;
   min-width: 0;
   min-height: 0;
-  width: 16px;
-  height: 2px;
+  width: 24px;
+  height: 24px;
   background-color: #606060;
   visibility: hidden;
   border: none;
