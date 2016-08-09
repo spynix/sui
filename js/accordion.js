@@ -35,82 +35,94 @@
  */
 
 
-define(["jquery"], function($) {
-	var accordion_module = (function() {
-		var top_accordion_id = 0;
-		
-		return {
-			create: function(element, panels, config) {
-				var accordion, i, l;
-				
-				if (!element || !panels)
-				  return false;
-				  
-				$(element).addClass("accordion");
-        
-        accordion = (function(element, top_id) {
+define(["jquery"], function ($) {
+  var accordion_module = (function () {
+    var top_accordion_id = 0;
+
+    return {
+      create: function (element, panels, config) {
+        var accordion, i, l;
+
+        if (!element || !panels)
+          return false;
+
+        $(element).addClass("accordion");
+
+        accordion = (function (element, top_id) {
           var id = top_id;
           var top_panel_id = 0;
           var panel_list = [];
-          
-          var attach_event = function(element, event, f) {
+
+          var attach_event = function (element, event, f) {
             element[event] = f;
           };
-          
+
           return {
-            id: function() {
+            id: function () {
               return id;
             },
-            
-            top_panel_id: function() {
+
+            top_panel_id: function () {
               return top_panel_id;
             },
-            
-            add_panel: function(title, content) {
+
+            get_panel: function (index) {
+              return panel_list[index];
+            },
+
+            get_title: function (index) {
+              return panel_list[index].getElementsByClassName("accordion-title")[0];
+            },
+
+            get_content: function (index) {
+              return panel_list[index].getElementsByClassName("accordion-content")[0];
+            },
+
+            add_panel: function (title, content) {
               var panel = document.createElement("div");
               var head = document.createElement("div");
               var body = document.createElement("div");
-              
+
               panel.id = "accordion_" + id.toString() + "_panel_" + top_panel_id.toString();
               panel.className = "accordion-panel";
-              
+
               head.className = "accordion-title";
               body.className = "accordion-content";
-              
+
               head.innerHTML = title;
               body.innerHTML = content;
-              
+
               panel.appendChild(head);
               panel.appendChild(body);
-              
+
               element.appendChild(panel);
               panel_list.push(panel);
               top_panel_id++;
-              
-              $(body).slideUp({ duration: 0 });
-              
-              attach_event(head, "onclick", (function(body) {
-                return function() {
-                  $(body).slideToggle({ duration: 250 });
+
+              $(body).slideUp({duration: 0});
+
+              attach_event(head, "onclick", (function (body) {
+                return function () {
+                  $(body).slideToggle({duration: 250});
                 };
               })(body));
             }
           };
         })(element, top_accordion_id);
-        
+
         top_accordion_id++;
-        
+
         for (i = 0, l = panels.length; i < l; i++)
           accordion.add_panel(panels[i].title, panels[i].content);
-        
+
         return accordion;
-			},
-			
-			get_top_id: function() {
-				return top_accordion_id;
-			}
-		};
-	})();
-	
-	return accordion_module;
+      },
+      
+      get_top_id: function () {
+        return top_accordion_id;
+      }
+    };
+  })();
+
+  return accordion_module;
 });
