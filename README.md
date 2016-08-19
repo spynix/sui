@@ -1,17 +1,7 @@
 #SUI - Spynix's UI
 
-This UI package is not particularly robust, nor is it full of the expansive
-features found in popular frameworks.  It fills a smaller niche, while including
-some of the popular UI functions.  I call it "reinventing the wheel... only
-rounder." ;p
-
-But no, really... at present this is more of a personal experiment in my free
-time than anything else.
-
-I wanted to call the library something like Simple UI or Standalone UI or the
-like.  Problem is, those names are either so common they're definitely already
-taken, they're too long for me to bother typing repeatedly, or they're just
-plain stupid sounding.  So I settled on Spynix's UI for now.
+At present this is more of a personal experiment in my free time than anything
+else.  Just reinventing the wheel some.
 
 ##Available Components
 - Accordion
@@ -50,27 +40,19 @@ plain stupid sounding.  So I settled on Spynix's UI for now.
 
 ##Ideology
 
-- First and foremost, each module should be reasonably small and simple.  Large
-frameworks are great.  A good number of people have spent a lot of time and
-effort making them work well.  Sometimes though, and I know this is just silly
-and all but... you don't *always* want stuff to look or work just like theirs.
-You try changing **d** which in turn breaks **e**, **f**, **g**, **h**, **i**... either by mucking
-up the inheritance or worse actual functionality.  Rather than a fully built
-framework that you have to work backwards to modify, this is meant to handle
-only the lowest level of functionality -- just enough for it to work, not enough
-to be cool -- and then be built up from that point.
+- I want each module as small and simple as possible, without using other
+libraries.
 
 - Each module should be self-sufficient without relying on custom data assigned
 to nodes or window globals.  Sometimes it has to be done, but the idea is to
 make the intrusion as small as possible.
 
 - Each module should separate the logic and presentation as much as possible.
-This means utilizing stylesheeting as much as possible rather than inline
-styling.
+This means utilizing stylesheeting instead of inline styling when able.
 
 - Each module should return a closured expression which provides the module's
-functionality.  This makes it possible to always maintain the component count,
-which is important for indexing.
+functionality.  This makes it possible to always maintain the component count
+and other goodies.
 
 - Each module should have a create function which is the primary method of the
 module.  This should return either an object or a properly closed expression
@@ -97,13 +79,7 @@ don't use it.
 
 ##License
 
-This code is released under the 2-clause ("simplified") BSD license.  The full
-license can be viewed at ./LICENSE.
-
-## Other
-
-I had written other UI code in the past that utilized globals under a namespace.
-This is the rewrite of that to conform to this library's ideology, however in
-the future I may clean up and provide the old form as well.  Having global
-access to your framework can reduce hassle, and I can envision cases where you'd
-just want to make it do what you want it to do without a lot of drama.
+This code is currently under the 2-clause ("simplified") BSD license.  The full
+license can be viewed at ./LICENSE.  If this library ever approaches awesome, I
+might consider modifying the license.  If I do, it will probably end up
+something like "free for non-commercial."

@@ -1,10 +1,10 @@
-/*   File: examples.css
+/*   File: examples_modal_1.js
  * Author: Jin Savage ("spynix")
- * 
- * 
+ *
+ *
  * License - 2-clause ("simplified") BSD
  * ----------------------------------------------------------------------------
- * 
+ *
  * Copyright (c) 2015, Jin Savage ("spynix")
  * All rights reserved.
  *
@@ -30,35 +30,28 @@
  */
 
 
-body {
-  background-color: #d0d0d0;
-}
+require.config({
+  paths: {
+    jquery: "jquery-2.1.4.min"
+  }
+});
 
 
-.container {
-	width: 80%;
-	min-width: 640px;
-  padding: 0;
-  margin: 16px auto;
-}
+require(["jquery", "modal"], function($, modal) {
+  var modal1, makemodal;
 
+  modal1 = modal.create({
+    content: "this is some modal content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content. this is content.",
+    title: "modal title",
+    width: "300px",
+    height: "300px"
+  });
 
-.bordered {
-	border: 1px solid #202020;
-	padding: 1px;
-}
+  makemodal = document.getElementById("makemodal");
 
-
-.modal-container {
-  background-color: #a0a0c0;
-  padding: 8px;
-  max-width: 800px;
-}
-
-
-.tipme {
-	cursor: pointer;
-	display: inline-block;
-	color: #60a060;
-	text-decoration: underline;
-}
+  makemodal["onclick"] = (function(w) {
+    return function() {
+      w();
+    };
+  })(modal1.show);
+});
