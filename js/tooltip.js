@@ -68,61 +68,61 @@
  */
 
 
-define(["jquery"], function($) {
-  var tooltip_module = (function() {
+define(["jquery"], function ($) {
+  var tooltip_module = (function () {
     var top_tooltip_id = 0;
     var vectors = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
     var connectors = ["arrow", "line", "none"];
-    
+
     var defaults = {
-      id: -1,                         /* unique id for every tooltip */
-      active: true,                   /* is this tooltip on or off (not related to showing or not) */
-      visible: false,                 /* is the tooltip currently being displayed */
-      element: null,                  /* the parent element this tooltip is attached to */
-      container: null,                /* reference for the generated tooltip element */
-      hook: null,                     /* see devnotes->hook */
-      title: null,                    /* if a title is specified, creates a dialogue modal style header */
-      content: "This is a tooltip.",  /* innerHTML of the tooltip's body */
-      vector: "n",                    /* see devnotes->vector */
-      distance: 16,                   /* distance in pixels the tooltip will appear from the element */
-      connector: "line",              /* the graphical connector made between the tooltip and the element */
-      show_delay: 400,                /* wait period before showing the tooltip */
-      show_timeout: null,             /* reference to the timeout function for show */
-      show_transition: 250,           /* transition time from transparent to opaque */
-      hide_delay: 400,                /* wait period before hiding the tooltip */
-      hide_timeout: null,             /* reference to the timeout function for hide */
-      hide_transition: 250            /* transition time from opaque to transparent */
+      id: -1,                        /* unique id for every tooltip */
+      active: true,                  /* is this tooltip on or off (not related to showing or not) */
+      visible: false,                /* is the tooltip currently being displayed */
+      element: null,                 /* the parent element this tooltip is attached to */
+      container: null,               /* reference for the generated tooltip element */
+      hook: null,                    /* see devnotes->hook */
+      title: null,                   /* if a title is specified, creates a dialogue modal style header */
+      content: "This is a tooltip.", /* innerHTML of the tooltip's body */
+      vector: "n",                   /* see devnotes->vector */
+      distance: 16,                  /* distance in pixels the tooltip will appear from the element */
+      connector: "line",             /* the graphical connector made between the tooltip and the element */
+      show_delay: 400,               /* wait period before showing the tooltip */
+      show_timeout: null,            /* reference to the timeout function for show */
+      show_transition: 250,          /* transition time from transparent to opaque */
+      hide_delay: 400,               /* wait period before hiding the tooltip */
+      hide_timeout: null,            /* reference to the timeout function for hide */
+      hide_transition: 250           /* transition time from opaque to transparent */
     };
-    
-    
+
+
     /* create():
      *   creates the tooltip element itself
      */
-    var create = function(config) {
+    var create = function (config) {
       var container = document.createElement("div");
       var title = config.title !== null ? document.createElement("div") : false;
       var content = document.createElement("div");
-      
+
       container.id = "tooltip_" + config.id.toString();
       container.className = "tooltip";
-        
+
       if (title) {
         title.className = "tooltip-title";
         title.innerHTML = config.title;
         container.appendChild(title);
       }
-      
+
       content.className = "tooltip-content";
       content.innerHTML = config.content;
       container.appendChild(content);
-      
+
       document.body.appendChild(container);
-      
+
       return container;
     };
-    
-    
-    var position = function(hook, container, vector, distance) {
+
+
+    var position = function (hook, container, vector, distance) {
       var body_bounds, hook_bounds, container_bounds;
       var hook_center, hook_middle;
       var container_top, container_left;
@@ -131,10 +131,10 @@ define(["jquery"], function($) {
       body_bounds = document.body.getBoundingClientRect();
       hook_bounds = hook.getBoundingClientRect();
       container_bounds = container.getBoundingClientRect();
-      
+
       hook_width = hook_bounds.right - hook_bounds.left;
       hook_height = hook_bounds.bottom - hook_bounds.top;
-      
+
       container_width = container_bounds.right - container_bounds.left;
       container_height = container_bounds.bottom - container_bounds.top;
 
@@ -146,40 +146,40 @@ define(["jquery"], function($) {
         default:
           container_top = hook_bounds.top - distance - container_height;
           container_top += window.scrollY;
-          
+
           container_left = Math.round(hook_center - Math.round(container_width / 2));
           container_left += window.scrollX;
-          
+
           break;
         case "ne":
           break;
         case "e":
           container_top = Math.round(hook_middle - Math.round(container_height / 2));
           container_top += window.scrollY;
-          
+
           container_left = hook_bounds.right + distance;
           container_left += distance;
-          
+
           break;
         case "se":
           break;
         case "s":
           container_top = hook_bounds.bottom + distance;
           container_top += window.scrollY;
-          
+
           container_left = Math.round(hook_center - Math.round(container_width / 2));
           container_left += window.scrollX;
-          
+
           break;
         case "sw":
           break;
         case "w":
           container_top = Math.round(hook_middle - Math.round(container_height / 2));
           container_top += window.scrollY;
-          
+
           container_left = hook_bounds.left - distance - container_width;
           container_left += window.scrollX;
-          
+
           break;
         case "nw":
           break;
@@ -189,43 +189,45 @@ define(["jquery"], function($) {
       container.style.top = container_top + "px";
       container.style.left = container_left + "px";
     };
-    
-    
+
+
     /* attach():
      *   performs dom element<->tooltip linking
      */
-    var attach = function(element, config) {
+    var attach = function (element, config) {
 //      var i = 0, l = 0;
 //      var event_handles = [];
       var container, hook;
-      
+
       if (!element || !config)
         return false;
-      
+
       container = create(config);
-      
+
       $(element).wrap('<div class="tooltip-hook"></div>');
       hook = element.parentElement;
-      
+
       /* can probably just set display: hidden here and save some cycles */
-      $(container).fadeOut({ duration: 0 });
-      
-      $(hook).on("mouseenter", (function(hook, container, vector, duration, transition, distance) {
+      $(container).fadeOut({duration: 0});
+
+      $(hook).on("mouseenter", (function (hook, container, vector, duration, transition, distance) {
         var timeout = false;
-        
-        return function() {
+
+        return function () {
           if (timeout !== false) {
             clearTimeout(timeout);
             timeout = false;
           }
-          
+
           if (!isNaN(duration) && (duration >= 1) && (duration <= 5000))
-            timeout = setTimeout((function(hook, container, vector, distance) {
-              return function() {
+            timeout = setTimeout((function (hook, container, vector, distance) {
+              return function () {
                 $(container).fadeIn({
                   duration: transition,
-                  start: function() { position(hook, container, vector, distance); },
-                  complete: function() {
+                  start: function () {
+                    position(hook, container, vector, distance);
+                  },
+                  complete: function () {
                   }
                 });
               };
@@ -233,42 +235,44 @@ define(["jquery"], function($) {
           else {
             $(container).fadeIn({
               duration: transition,
-              start: function() { position(hook, container, vector, distance); },
-              complete: function() {
+              start: function () {
+                position(hook, container, vector, distance);
+              },
+              complete: function () {
               }
             });
           }
         };
       }(hook, container, config.vector, config.show_delay, config.show_transition, config.distance)));
-      
-      $(hook).on("mouseleave", (function(hook, container, vector, duration, transition) {
+
+      $(hook).on("mouseleave", (function (hook, container, vector, duration, transition) {
         var timeout = false;
-        
-        return function() {  
+
+        return function () {
           if (timeout !== false) {
             clearTimeout(timeout);
             timeout = false;
           }
 
           if (!isNaN(duration) && (duration >= 1) && (duration <= 5000))
-            timeout = setTimeout(function() {
+            timeout = setTimeout(function () {
               $(container).fadeOut({
                 duration: transition,
-                complete: function() {
+                complete: function () {
                 }
               });
             }, duration);
           else {
             $(container).fadeOut({
               duration: transition,
-              complete: function() {
+              complete: function () {
               }
             });
           }
         };
-      } (hook, container, config.vector, config.hide_delay, config.hide_transition)));
-      
-      
+      }(hook, container, config.vector, config.hide_delay, config.hide_transition)));
+
+
       /* get the triggers for everything in tooltip.events and generate the
        * corresponding handlers for them all
        */
@@ -277,27 +281,27 @@ define(["jquery"], function($) {
 //      for (i = 0, l = event_handles.length; i < l; i++)
 //        $(config.hook).on(event_handles[i], config.events[event_handles[i]]);
     };
-    
-    
+
+
     /* nearest_vector():
      *   if an actual angle is used, this will determine which vector to use
      *   based on that angle.  rotation is clockwise beginning at 0-deg = north.
      */
-    var nearest_vector = function(angle) {
+    var nearest_vector = function (angle) {
       if (angle <= -1)
         angle *= -1;
-      
+
       return (vectors[Math.round(angle / 45) % 8]);
     };
-    
-    
+
+
     /* tooltip():
      *   module entry point.  for now rather than returning a group of closed
      *   functions it simply pipes a single function -- the one to actually
      *   produce the tooltip -- instead.  once i decide how i want to handle
      *   removing an existing tooltip this may change.
      */
-    var tooltip = function(element, config) {
+    var tooltip = function (element, config) {
       var options = {};
 
       if (!element)
@@ -308,7 +312,7 @@ define(["jquery"], function($) {
         return false;
 
       $.extend(true, options, defaults, config);
-      
+
       /* if the vector is a mathematical angle, transform it to a directional
        * vector relative to the element */
       if (!isNaN(options.vector))
@@ -318,12 +322,12 @@ define(["jquery"], function($) {
       top_tooltip_id++;
 
       attach(element, options);
-      
+
       return true;
     };
-    
+
     return tooltip;
   })();
-  
+
   return tooltip_module;
 });
