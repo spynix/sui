@@ -79,11 +79,9 @@ define(["jquery", "tooltip"], function ($, tooltip) {
             id: function () {
               return id;
             },
-
             top_tool_id: function () {
               return top_tool_id;
             },
-
             add_tool: function (icon, text) {
               var tool = document.createElement("div");
               var span, spacer, txt;
@@ -117,8 +115,7 @@ define(["jquery", "tooltip"], function ($, tooltip) {
 
               return tool; /* return the tool element so we can attach a tooltip if needed */
             },
-
-            get_tool: function(method) {
+            get_tool: function (method) {
               if (!isNaN(method)) {
                 if ((method >= 0) && (method < tool_list.length))
                   return tool_list[method];
@@ -128,7 +125,6 @@ define(["jquery", "tooltip"], function ($, tooltip) {
 
               return null;
             },
-            
             remove_tool: function () {
             }
           };
@@ -145,7 +141,6 @@ define(["jquery", "tooltip"], function ($, tooltip) {
 
         return toolbar;
       },
-
       get_top_id: function () {
         return top_toolbar_id;
       }
