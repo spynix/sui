@@ -123,7 +123,7 @@ define(["jquery", "tooltip"], function ($, tooltip) {
                 if ((method >= 0) && (method < tool_list.length))
                   return tool_list[method];
               } else if (typeof method === "string") {
-                // TODO: pull by some sort of label
+                /* TODO: pull by some sort of label */
               }
 
               return null;
