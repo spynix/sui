@@ -28,7 +28,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 
 require.config({
   paths: {
@@ -37,61 +37,57 @@ require.config({
 });
 
 
-require(["jquery", "toolbar"], function($, toolbar) {
-	var bar1, bar2;
-	
-	bar1 = toolbar.create(document.getElementById("toolbar1"), [
-	  {
+require(["jquery", "toolbar"], function ($, toolbar) {
+  var bar1, bar2;
+
+  bar1 = toolbar.create(document.getElementById("toolbar1"), [
+    {
       icon: "fa-cube",
       text: "Cube",
       tooltip: {
         content: "Perform a cube on the specified target"
       }
-    },
-    {
+    }, {
       icon: "fa-folder-o"
-    },
-    {
+    }, {
       icon: "fa-line-chart",
       text: "Charting"
-    },
-    {
+    }, {
       icon: "fa-music",
       text: "Sheet Music"
-    },
-    {
+    }, {
       icon: "fa-square-o",
       text: "Square",
       tooltip: {
         content: "Perform a square on the specified target"
       }
     }
-	]);
-	
-	bar2 = toolbar.create(document.getElementById("toolbar2"), [
-	  {
-		  icon: "fa-rss",
-		  tooltip: {
-			  content: "RSS Feed"
-		  }
-	  },
-	  {
-		  icon: "fa-plus",
-		  tooltip: {
-			  content: "Add"
-		  }
-	  },
-	  {
-		  icon: "fa-trash",
-		  tooltip: {
-			  content: "Remove"
-		  }
-	  },
-	  {
-		  icon: "fa-cog",
-		  tooltip: {
-			  content: "Settings"
-		  }
-	  }
-	]);
+  ]);
+
+  bar2 = toolbar.create(document.getElementById("toolbar2"), [
+    {
+      icon: "fa-rss",
+      tooltip: {
+        content: "RSS Feed"
+      }
+    },
+    {
+      icon: "fa-plus",
+      tooltip: {
+        content: "Add"
+      }
+    },
+    {
+      icon: "fa-trash",
+      tooltip: {
+        content: "Remove"
+      }
+    },
+    {
+      icon: "fa-cog",
+      tooltip: {
+        content: "Settings"
+      }
+    }
+  ]);
 });

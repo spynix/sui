@@ -53,44 +53,44 @@
  */
 
 
-define(["jquery", "tooltip"], function($, tooltip) {
-  var toolbar_module = (function() {
-    var top_toolbar_id = 0;  
-    
+define(["jquery", "tooltip"], function ($, tooltip) {
+  var toolbar_module = (function () {
+    var top_toolbar_id = 0;
+
     return {
-      create: function(bar, tools, config) {
+      create: function (bar, tools, config) {
         var i, l, temp, toolbar;
-        
+
         if (!bar || !tools)
           return false;
-        
+
         $(bar).addClass("toolbar");
-        
-        toolbar = (function(bar, top_id) {
+
+        toolbar = (function (bar, top_id) {
           var id = top_id;
           var top_tool_id = 0;
           var tool_list = [];
 
-          var attach_event = function(element, event, f) {
+          var attach_event = function (element, event, f) {
             element[event] = f;
           };
-          
+
           return {
-            id: function() {
+            id: function () {
               return id;
             },
-            
-            top_tool_id: function() {
+
+            top_tool_id: function () {
               return top_tool_id;
             },
-            
-            add_tool: function(icon, text) {
+
+            add_tool: function (icon, text) {
               var tool = document.createElement("div");
               var span, spacer, txt;
 
               tool.id = "tool_" + top_tool_id.toString();
               tool.className = "tool";
-              
+
               if (icon) {
                 span = document.createElement("span");
                 span.className = "icon fa fa-fw " + icon;
@@ -114,32 +114,43 @@ define(["jquery", "tooltip"], function($, tooltip) {
               bar.appendChild(tool);
               tool_list.push(tool);
               top_tool_id++;
-              
+
               return tool; /* return the tool element so we can attach a tooltip if needed */
             },
+
+            get_tool: function(method) {
+              if (!isNaN(method)) {
+                if ((method >= 0) && (method < tool_list.length))
+                  return tool_list[method];
+              } else if (typeof method === "string") {
+                // TODO: pull by some sort of label
+              }
+
+              return null;
+            },
             
-            remove_tool: function() {
+            remove_tool: function () {
             }
           };
         })(bar, top_toolbar_id);
-        
+
         top_toolbar_id++;
-        
+
         for (i = 0, l = tools.length; i < l; i++) {
           temp = toolbar.add_tool(tools[i].icon, tools[i].text);
-          
+
           if (tools[i].tooltip)
             tooltip(temp, tools[i].tooltip);
         }
-        
+
         return toolbar;
       },
-      
-      get_top_id: function() {
-	      return top_toolbar_id;
+
+      get_top_id: function () {
+        return top_toolbar_id;
       }
     };
   })();
-  
+
   return toolbar_module;
 });
