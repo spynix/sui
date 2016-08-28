@@ -321,9 +321,9 @@ define(["jquery"], function ($) {
               }
 
               if (data !== null)
-                $(element).text(data.toString());
+                $(element).html(data.toString());
               else
-                $(element).text("");
+                $(element).html("");
             }
           },
           
